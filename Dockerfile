@@ -1,5 +1,4 @@
-FROM python:3.8
-#ubuntu:16.04
+FROM ubuntu:16.04
 
 
 COPY script.sh /
