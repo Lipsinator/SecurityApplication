@@ -44,8 +44,6 @@ then
   	--namespace $selectedNamespace \
   	--output yaml
 
-
-	#starboard polaris deployment/nginx --namespace test
 else	
 	clear
 	echo -e "\e[31m================================="  
