@@ -1,0 +1,150 @@
+apiVersion: v1
+items:
+- apiVersion: aquasecurity.github.io/v1alpha1
+  kind: ConfigAuditReport
+  metadata:
+    creationTimestamp: "2020-10-22T12:50:28Z"
+    generation: 30
+    labels:
+      starboard.resource.kind: Deployment
+      starboard.resource.name: nginx
+      starboard.resource.namespace: dev
+    managedFields:
+    - apiVersion: aquasecurity.github.io/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:starboard.resource.kind: {}
+            f:starboard.resource.name: {}
+            f:starboard.resource.namespace: {}
+          f:ownerReferences: {}
+        f:report:
+          .: {}
+          f:containerChecks:
+            .: {}
+            f:nginx: {}
+          f:podChecks: {}
+          f:scanner:
+            .: {}
+            f:name: {}
+            f:vendor: {}
+            f:version: {}
+          f:summary:
+            .: {}
+            f:dangerCount: {}
+            f:warningCount: {}
+      manager: starboard
+      operation: Update
+      time: "2020-10-27T09:38:37Z"
+    name: deployment.nginx
+    namespace: dev
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: nginx
+      uid: d69948d1-245e-4be2-848c-c60cddb75596
+    resourceVersion: "601096"
+    selfLink: /apis/aquasecurity.github.io/v1alpha1/namespaces/dev/configauditreports/deployment.nginx
+    uid: edbd550a-e61b-4f49-933e-66a7f8b62468
+  report:
+    containerChecks:
+      nginx:
+      - category: Images
+        checkID: tagNotSpecified
+        message: Image tag is specified
+        severity: danger
+        success: true
+      - category: Resources
+        checkID: cpuLimitsMissing
+        message: CPU limits should be set
+        severity: warning
+        success: false
+      - category: Health Checks
+        checkID: readinessProbeMissing
+        message: Readiness probe should be configured
+        severity: warning
+        success: false
+      - category: Resources
+        checkID: memoryRequestsMissing
+        message: Memory requests should be set
+        severity: warning
+        success: false
+      - category: Security
+        checkID: notReadOnlyRootFilesystem
+        message: Filesystem should be read only
+        severity: warning
+        success: false
+      - category: Security
+        checkID: runAsRootAllowed
+        message: Should not be allowed to run as root
+        severity: warning
+        success: false
+      - category: Security
+        checkID: dangerousCapabilities
+        message: Container does not have any dangerous capabilities
+        severity: danger
+        success: true
+      - category: Networking
+        checkID: hostPortSet
+        message: Host port is not configured
+        severity: warning
+        success: true
+      - category: Security
+        checkID: runAsPrivileged
+        message: Not running as privileged
+        severity: danger
+        success: true
+      - category: Resources
+        checkID: cpuRequestsMissing
+        message: CPU requests should be set
+        severity: warning
+        success: false
+      - category: Resources
+        checkID: memoryLimitsMissing
+        message: Memory limits should be set
+        severity: warning
+        success: false
+      - category: Security
+        checkID: privilegeEscalationAllowed
+        message: Privilege escalation not allowed
+        severity: danger
+        success: true
+      - category: Security
+        checkID: insecureCapabilities
+        message: Container does not have any insecure capabilities
+        severity: warning
+        success: true
+      - category: Health Checks
+        checkID: livenessProbeMissing
+        message: Liveness probe should be configured
+        severity: warning
+        success: false
+    podChecks:
+    - category: Security
+      checkID: hostIPCSet
+      message: Host IPC is not configured
+      severity: danger
+      success: true
+    - category: Networking
+      checkID: hostNetworkSet
+      message: Host network is not configured
+      severity: warning
+      success: true
+    - category: Security
+      checkID: hostPIDSet
+      message: Host PID is not configured
+      severity: danger
+      success: true
+    scanner:
+      name: Polaris
+      vendor: Fairwinds Ops
+      version: "1.2"
+    summary:
+      dangerCount: 0
+      warningCount: 8
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
