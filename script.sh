@@ -28,26 +28,26 @@ while [[ $startStop == "y" ]]; do
 	while read line; do echo "$line"; done <<< "$nameSpaces"	
 	
 	# select and switch to a chosen namespace.
-	read -p "Enter a namespace to see scannable deployments: " selectedNamespace
+	read -p "Enter a namespace to see scannable pods: " selectedNamespace
 	oc project $selectedNamespace
 	clear
 
-	# list the deployments running in selected namespace and select one
-	echo -e "\e[32mYour current deployments in $selectedNamespace: \e[0m" 
-	oc get deployments | awk '{print $1, $8}' |  sed 1,1d
+	# list the pods running in selected namespace and select one
+	echo -e "\e[32mYour current pods in $selectedNamespace: \e[0m" 
+	oc get pods | awk '{print $1, $8}' |  sed 1,1d
 
-	read -p "Enter a deployment to initaite a polaris scan: " selectedDeployment
+	read -p "Enter a pod to initaite a polaris scan: " selectedPod
 	
 	# initiate polaris scan over chosen depoyment and write the logs to a file in the polarislogs dir
-	starboard polaris deployment/$selectedDeployment --namespace $selectedNamespace & 
-	touch polarislogs/$selectedNamespace$selectedDeployment.txt
-	starboard get configaudit deployment/$selectedDeployment \
+	starboard polaris pod/$selectedPod --namespace $selectedNamespace & 
+	touch polarislogs/$selectedNamespace$selectedPod.txt
+	starboard get configaudit pod/$selectedPod \
   	--namespace $selectedNamespace \
-  	--output yaml > polarislogs/$selectedNamespace$selectedDeployment.txt
+  	--output yaml > polarislogs/$selectedNamespace$selectedPod.txt
 	echo -e "\e[32mThe result of the scan has been saved in the polarislogs folder\e[0m"
 
 	# ask to start the sequence again
-	read -s -p "Do you want to scan another namespace? [y/n]: " startStop
+	read -p "Do you want to scan another namespace? [y/n]: " startStop
 done
 
 clear
