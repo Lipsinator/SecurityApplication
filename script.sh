@@ -19,7 +19,7 @@ echo -e "\e[31mPlease note that in order for this application to work you need t
 sudo cp starboard /usr/local/bin
 
 startStop="y"
-while [[ $startStop == "y" ]]; do
+while [[ $startStop == "yY" ]]; do
 	
 	# get and write all the namespaces running on the platform to screen
 	nameSpaces=`oc get namespaces | awk '{print $1, $8}' |  sed 1,1d`
